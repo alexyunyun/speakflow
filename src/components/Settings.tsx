@@ -81,7 +81,7 @@ export function SettingsPanel({ settings, setSettings, onClose }: Props) {
           <Btn variant="soft" size="sm" onClick={testKey} disabled={testing || !settings.apiKey}>
             {testing ? '测试中…' : '测试连接'}
           </Btn>
-          <span className={`ai-status ${testResult?.ok ? 'ok' : ''}`}>{aiModeHint()}</span>
+          <span className={`ai-status ${testResult?.ok ? 'ok' : ''}`}>{aiModeHint(settings.apiKey)}</span>
         </div>
         {testResult && <div className={testResult.ok ? 'rec-ok' : 'rec-err'}>{testResult.msg}</div>}
       </section>

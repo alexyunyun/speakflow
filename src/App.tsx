@@ -34,9 +34,10 @@ export function App() {
   const [gQuery, setGQuery] = useState('')
   const [drillSeed, setDrillSeed] = useState<DrillSeed | undefined>()
   const [vocabSeed, setVocabSeed] = useState<VocabSeed | undefined>()
+  const [, setProbeTick] = useState(0)
   const toastTimer = useRef<number | undefined>(undefined)
 
-  useEffect(() => { void probe() }, [])
+  useEffect(() => { probe().finally(() => setProbeTick((t) => t + 1)) }, [])
 
   const hasAI = aiReady(settings.apiKey)
   const streak = streakOf(progress)

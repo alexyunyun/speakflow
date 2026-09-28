@@ -27,16 +27,19 @@ export async function probe(): Promise<void> {
   mode = 'direct'
 }
 
-/** 当前配置下 AI 是否可用(userKey = 用户在设置里填的 Key) */
+/** 当前配置下 AI 是否可用(userKey = 用户在设置里填的 Key)
+ *  注意:只要用户填了 Key,本地代理和浏览器直连两种模式都能用
+ *  (服务端优先使用请求头里的 x-api-key),因此可以同步判断,
+ *  避免探测未完成时界面误显示"未配置"。 */
 export function aiReady(userKey: string): boolean {
   if (isDemo()) return true
-  if (mode === 'proxy') return proxyHasKey || Boolean(userKey.trim())
-  if (mode === 'direct') return Boolean(userKey.trim())
-  return false
+  if (userKey.trim()) return true
+  return mode === 'proxy' && proxyHasKey
 }
 
-export function aiModeHint(): string {
+export function aiModeHint(userKey = ''): string {
   if (isDemo()) return '演示模式:返回模拟数据,不消耗额度'
+  if (userKey.trim()) return mode === 'proxy' ? '已填 Key:将经由本地服务调用' : '已填 Key:浏览器直连 DeepSeek'
   if (mode === 'proxy') return proxyHasKey ? 'AI 已就绪(服务端 Key)' : 'AI 就绪需在设置里填入 Key'
   return '未检测到本地服务,需在设置里填 Key 直连 DeepSeek'
 }
