@@ -649,17 +649,34 @@ code { background: var(--surface2); border: 1.5px solid #141414; border-radius: 
 
 /* 词汇表 */
 .vocab-toolbar { display: flex; gap: 9px; margin-bottom: 12px; align-items: center; flex-wrap: wrap; }
-.vocab-list { display: flex; flex-direction: column; gap: 10px; }
-.vocab-row {
-  display: flex; gap: 12px; align-items: flex-start;
-  background: var(--surface); border: 2px solid var(--line);
-  border-radius: var(--radius); padding: 13px 15px;
+.vocab-toolbar .btn { flex-shrink: 0; }
+.vocab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; }
+.vcard {
+  border: 2px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); padding: 12px 13px;
   box-shadow: var(--hard-sm);
+  display: flex; flex-direction: column; gap: 7px;
 }
-.vocab-term { font-weight: 900; font-size: 15.5px; }
-.vocab-ph { color: var(--muted); font-size: 12.5px; font-weight: 800; }
-.vocab-zh { font-size: 13px; margin-top: 2px; color: var(--ink); font-weight: 600; }
-.vocab-tags { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
+.vcard.learned { background: var(--accent-soft); }
+.v-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.v-term { font-weight: 900; font-size: 15.5px; display: flex; align-items: baseline; gap: 7px; min-width: 0; flex-wrap: wrap; }
+.v-done {
+  font-size: 10.5px; font-weight: 900; color: var(--ink);
+  background: var(--accent); border: 1.5px solid var(--line); border-radius: 6px; padding: 0 6px;
+}
+.v-actions { display: flex; gap: 5px; flex-shrink: 0; }
+.vbtn {
+  width: 28px; height: 28px; border-radius: 8px;
+  border: 2px solid var(--line); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 2px 2px 0 var(--line); transition: all .12s ease;
+  font-weight: 900; font-size: 12px; color: var(--ink);
+}
+.vbtn:hover { background: var(--yellow); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--line); }
+.vbtn.on { background: var(--accent); }
+.vbtn.wide { width: auto; height: 26px; padding: 0 10px; align-self: flex-start; }
+.vocab-zh { font-size: 13px; margin-top: 0; color: var(--ink); font-weight: 600; }
+.vocab-tags { display: flex; gap: 5px; margin-top: 0; flex-wrap: wrap; }
 .vtag {
   font-size: 10.5px; font-weight: 900; color: var(--ink); background: var(--surface2);
   border: 1.5px solid var(--line); border-radius: 6px; padding: 1px 7px;
@@ -668,6 +685,25 @@ code { background: var(--surface2); border: 1.5px solid #141414; border-radius: 
 .vocab-actions { display: flex; gap: 5px; align-items: center; flex-shrink: 0; }
 .vocab-actions .icon-btn:hover { background: var(--accent); }
 .vocab-actions .btn { border: 2px solid var(--line); }
+
+/* 翻页器 */
+.pager { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.pager-info { font-size: 13px; font-weight: 800; color: var(--muted); }
+.pager-info b { color: var(--ink); font-weight: 900; }
+.pager-jump {
+  width: 78px; height: 32px; border: 2px solid var(--line); border-radius: 10px;
+  text-align: center; font-weight: 800; background: var(--surface);
+  box-shadow: 2px 2px 0 var(--line); outline: none;
+}
+.pager-jump:focus { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--line); }
+.pager-sep { width: 2px; height: 24px; background: var(--line-soft); border-radius: 2px; margin: 0 2px; }
+
+/* 背单词 */
+.study-bar {
+  height: 13px; border: 2px solid var(--line); border-radius: 99px;
+  background: var(--surface); overflow: hidden; margin-bottom: 16px;
+}
+.study-bar > div { height: 100%; background: var(--accent); transition: width .2s ease; }
 
 /* 闪卡 */
 .flash { display: flex; flex-direction: column; align-items: center; gap: 13px; }
@@ -775,6 +811,7 @@ code { background: var(--surface2); border: 1.5px solid #141414; border-radius: 
   .tab-item.on { color: var(--ink); background: var(--accent); border: 2px solid var(--line); }
   .drill, .words, .vocab, .progress { padding: 4px 14px 86px; }
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .vocab-grid { grid-template-columns: 1fr; }
   .dash-grid { grid-template-columns: 1fr; }
   .lvl-row { grid-template-columns: repeat(2, 1fr); }
   .bubble { max-width: 88%; }
