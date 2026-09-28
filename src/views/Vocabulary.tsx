@@ -65,9 +65,9 @@ export function Vocabulary({ settings, seed, saveWord, onFindExamples }: Props) 
   }, [vocab, tag, query])
 
   const filtered = useMemo(() =>
-    base.filter((v) => status === 'all' || (status === 'ed' ? !!learned[v.w] : !learned[v.w])),
+    base.filter((v) => status === 'all' || (status === 'ed' ? Object.prototype.hasOwnProperty.call(learned, v.w) : !Object.prototype.hasOwnProperty.call(learned, v.w))),
   [base, status, learned])
-  const learnedInBase = useMemo(() => base.reduce((n, v) => n + (learned[v.w] ? 1 : 0), 0), [base, learned])
+  const learnedInBase = useMemo(() => base.reduce((n, v) => n + (Object.prototype.hasOwnProperty.call(learned, v.w) ? 1 : 0), 0), [base, learned])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE))
   const curPage = Math.min(Math.max(1, page), totalPages)
@@ -77,9 +77,16 @@ export function Vocabulary({ settings, seed, saveWord, onFindExamples }: Props) 
     setPage(Math.min(Math.max(1, p), totalPages))
     containerRef.current?.scrollTo({ top: 0 })
   }
-  const isLearned = (w: string) => !!learned[w]
+  // 注意:词库里有 "constructor" 这种与 Object.prototype 属性同名的真实单词,
+  // 判断已背必须用 hasOwnProperty,否则会命中原型链方法造成误判
+  const hasOwn = (w: string) => Object.prototype.hasOwnProperty.call(learned, w)
   const toggleLearned = (w: string) =>
-    setLearned((m) => { const c = { ...m }; if (c[w]) delete c[w]; else c[w] = Date.now(); return c })
+    setLearned((m) => {
+      if (Object.prototype.hasOwnProperty.call(m, w)) {
+        const c = { ...m }; delete c[w]; return c
+      }
+      return { ...m, [w]: Date.now() }
+    })
 
   function openStudy() {
     if (!filtered.length) return
@@ -91,6 +98,7 @@ export function Vocabulary({ settings, seed, saveWord, onFindExamples }: Props) 
     if (good && card) setLearned((m) => ({ ...m, [card.w]: Date.now() }))
     setStudy({ deck: study.deck, i: study.i + 1, known: study.known + (good ? 1 : 0), unknown: study.unknown + (good ? 0 : 1), shown: false })
   }
+  // study.deck 引用的 filtered 已含状态筛选;标记后 deck 快照不变,保证顺序稳定
 
   return (
     <div className="vocab" ref={containerRef}>
@@ -141,7 +149,7 @@ export function Vocabulary({ settings, seed, saveWord, onFindExamples }: Props) 
         <>
           <div className="vocab-grid">
             {shown.map((v) => {
-              const lv = isLearned(v.w)
+              const lv = hasOwn(v.w)
               return (
                 <div key={v.w} className={cx('vcard', lv && 'learned')}>
                   <div className="v-top">
