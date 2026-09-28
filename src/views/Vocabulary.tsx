@@ -73,8 +73,8 @@ export function Vocabulary({ settings, seed, saveWord, onFindExamples }: Props) 
   const curPage = Math.min(Math.max(1, page), totalPages)
   const shown = filtered.slice((curPage - 1) * PAGE, curPage * PAGE)
 
-  function goPage(p: number) {
-    setPage(Math.min(Math.max(1, p), totalPages))
+  function goPage(delta: number) {
+    setPage((p) => Math.min(Math.max(1, p + delta), totalPages))
     containerRef.current?.scrollTo({ top: 0 })
   }
   // 注意:词库里有 "constructor" 这种与 Object.prototype 属性同名的真实单词,
@@ -177,9 +177,9 @@ export function Vocabulary({ settings, seed, saveWord, onFindExamples }: Props) 
           </div>
 
           <div className="pager">
-            <Btn size="sm" variant="ghost" disabled={curPage <= 1} onClick={() => goPage(curPage - 1)}>← 上一页</Btn>
+            <Btn size="sm" variant="ghost" disabled={curPage <= 1} onClick={() => goPage(-1)}>← 上一页</Btn>
             <span className="pager-info">第 <b>{curPage}</b> / {totalPages.toLocaleString()} 页 · 共 {filtered.length.toLocaleString()} 词</span>
-            <Btn size="sm" variant="ghost" disabled={curPage >= totalPages} onClick={() => goPage(curPage + 1)}>下一页 →</Btn>
+            <Btn size="sm" variant="ghost" disabled={curPage >= totalPages} onClick={() => goPage(1)}>下一页 →</Btn>
             <input
               className="pager-jump" type="number" min={1} max={totalPages}
               placeholder={`${curPage}`}
