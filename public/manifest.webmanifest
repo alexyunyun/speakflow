@@ -4,8 +4,8 @@
   "description": "AI 英语口语陪练:情景对话、逐句纠错、影子跟读、生词本",
   "lang": "zh-CN",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#2563eb",
+  "background_color": "#fbf6ec",
+  "theme_color": "#ffd43b",
   "start_url": "./",
   "icons": [
     {

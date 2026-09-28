@@ -1,6 +1,12 @@
 # SpeakFlow · 英语口语陪练 🎙️
 
-一个本地运行的 AI 英语口语练习应用:和 AI 语音对话、逐句纠错打分、影子跟读、生词积累,目标是从日常交流练到接近母语表达。
+一个 AI 英语口语练习应用:和 AI 语音对话、逐句纠错打分、影子跟读、生词积累,目标是从日常交流练到接近母语表达。
+
+**在线版(已部署,推荐):https://alexyunyun.github.io/speakflow/**
+
+- 在线版打开后,在「设置」里粘贴你的 DeepSeek API Key 即可(Key 只存在你自己的浏览器里,调用时浏览器直连 DeepSeek,不经过第三方服务器)
+- 学习数据保存在各设备浏览器本地;换设备需重新填 Key(或用设置里的导出/导入备份数据)
+- 也可以在项目根目录 `npm start` 跑本地版,两种方式功能一致
 
 所有学习数据只保存在你自己的浏览器里,不经过任何第三方(除了你主动调用的 DeepSeek API)。
 
@@ -38,6 +44,18 @@ DEEPSEEK_API_KEY=sk-你的key
 - **语音输入**:基于浏览器 Web Speech API(免费),点麦克风说话,实时转文字
 - **AI 朗读**:回复自动朗读(可关),支持调整语速 0.6x–1.3x、选择系统语音
 - **难度适配**:A2 / B1 / B2 / C1 四档,AI 据此调整语速和用词
+
+## 部署(GitHub Pages)
+
+应用已配置自动部署:推送到 `main` 分支后,GitHub Actions 会自动构建并发布到 GitHub Pages(公开仓库免费)。
+
+```bash
+git add -A && git commit -m "更新" && git push   # 推送即自动重新部署
+```
+
+- 仓库:https://github.com/alexyunyun/speakflow
+- 线上地址:https://alexyunyun.github.io/speakflow/
+- 部署状态可在仓库的 Actions 页查看
 
 ## 使用建议
 

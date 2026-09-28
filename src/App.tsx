@@ -79,14 +79,14 @@ export function App() {
         <aside className="sidebar">
           <div className="logo">
             <div className="logo-mark">
-              <svg viewBox="0 0 64 64" width="30" height="30">
-                <rect width="64" height="64" rx="14" fill="#3B76F0" />
-                <g stroke="#fff" strokeWidth="4.5" strokeLinecap="round">
-                  <line x1="16" y1="26" x2="16" y2="38" /><line x1="24" y1="18" x2="24" y2="46" />
-                  <line x1="32" y1="24" x2="32" y2="40" /><line x1="40" y1="14" x2="40" y2="50" />
-                  <line x1="48" y1="28" x2="48" y2="36" />
-                </g>
-              </svg>
+            <svg viewBox="0 0 64 64" width="30" height="30">
+              <rect width="64" height="64" rx="14" fill="#FFD43B" stroke="#141414" strokeWidth="4" />
+              <g stroke="#141414" strokeWidth="5" strokeLinecap="round">
+                <line x1="16" y1="26" x2="16" y2="38" /><line x1="24" y1="18" x2="24" y2="46" />
+                <line x1="32" y1="24" x2="32" y2="40" /><line x1="40" y1="14" x2="40" y2="50" />
+                <line x1="48" y1="28" x2="48" y2="36" />
+              </g>
+            </svg>
             </div>
             <div className="logo-text">
               <b>SpeakFlow</b>

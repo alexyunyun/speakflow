@@ -44,9 +44,9 @@ export function ProgressView({ progress, words, onGoTalk }: Props) {
           <Btn variant="white" onClick={onGoTalk}>开始今天的练习 →</Btn>
         </div>
         <svg className="hero-deco" width="340" height="220" viewBox="0 0 340 220" fill="none" aria-hidden="true">
-          <circle cx="250" cy="90" r="120" stroke="rgba(158,192,255,.25)" strokeWidth="26" />
-          <circle cx="250" cy="90" r="70" stroke="rgba(158,192,255,.45)" strokeWidth="26" />
-          <circle cx="250" cy="90" r="26" fill="rgba(158,192,255,.7)" />
+          <circle cx="250" cy="90" r="120" stroke="rgba(20,20,20,.15)" strokeWidth="26" />
+          <circle cx="250" cy="90" r="70" stroke="rgba(20,20,20,.3)" strokeWidth="26" />
+          <circle cx="250" cy="90" r="26" fill="#141414" />
         </svg>
       </section>
 
